@@ -1,4 +1,8 @@
-cpf = input("Digite o CPF: ")
+import re
+import sys
+
+cpf_input = input("Digite o CPF: ")
+cpf = re.sub(r'[^0-9]', '', cpf_input)
 nove_digitos = cpf[:9]
 
 multiplicador1 = 10
@@ -22,6 +26,12 @@ resultado2 = ((soma2 * 10) % 11)
 segundo_digito = 0 if resultado2 > 9 else resultado2
 
 cpf_resolvido = nove_digitos + str(resultado1) + str(resultado2)
+
+teste_rep = cpf_input[0] * len(cpf)
+
+if teste_rep == cpf_resolvido:
+    print("CPF INVÁLIDO!")
+    sys.exit()
 
 if str(resultado1) == cpf[-2]:
     if str(resultado2) == cpf[-1]:
