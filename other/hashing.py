@@ -32,3 +32,18 @@ tested_pass = hashing(pass_input2)
 checked_pass = checking_hash(registered_pass, tested_pass)
 
 print(f'Login has been released? {checked_pass}')
+
+
+# another code teste
+
+# def hashing(pass_input):
+#     pass_hash = ''
+# 
+#     for letter in pass_input:
+#         pass_ascii.append(ord(letter))
+# 
+#     for i, num in enumerate(pass_ascii):
+#         x = str(num * random_mult) + chr(i + 92)
+#         pass_hash += x
+#     pass_ascii.clear()
+#     return pass_hash
