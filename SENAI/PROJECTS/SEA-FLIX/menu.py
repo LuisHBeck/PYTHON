@@ -1,4 +1,5 @@
 from random import randint
+from create import creat_db
 
 def selection_menu():
     '''
@@ -115,17 +116,22 @@ def action(option_choose):
             user['plan'] = select_plan()
 
             user_type_input = select_usertype()
-            if user_type_input == 'ADM':
-                pass_test = int(input('Input the ADM password>> '))
-                if pass_test == adm_pass:
-                    print("You're a real ADM!")
-                    user['type'] = user_type_input
-                else:
-                    print("You're not a ADM. You're a Normal User!")
-                    user['type'] = 'Normal User'
+            user['type'] = user_type_input
+            # if user_type_input == 'ADM':
+            #     pass_test = int(input('Input the ADM password>> '))
+            #     if pass_test == adm_pass:
+            #         print("You're a real ADM!")
+            #         user['type'] = user_type_input
+            #     else:
+            #         print("You're not a ADM. You're a Normal User!")
+            #         user['type'] = 'Normal User'
 
             id_user_ = id_user()
             user['id'] = id_user_
+
+            creat_db(user['name'], user['age'], user['email'],
+                     user['plan'], user['type'], user['id'])  #inputing data from the db
+
             print()
             print("Your register is done!!")
             print(f'Your ID for login is *{id_user_}*')
@@ -133,6 +139,7 @@ def action(option_choose):
             for k, v in user.items():
                 print(f'{k} = {v}\n')
             menu_repeat()
+
 
 user = {}
 users = ['2323']
