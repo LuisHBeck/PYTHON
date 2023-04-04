@@ -1,5 +1,6 @@
 from random import randint
-from create import creat_db
+from create import *
+from read import *
 
 def selection_menu():
     '''
@@ -10,13 +11,25 @@ def selection_menu():
     questions = [
         inquirer.List('option_choose',
                       message="Choose your option",
-                      choices=['Login', 'Register User',
+                      choices=['Register User',
                                'List Movies', 'Register Movie',
-                               'Menu', 'Logout'],
+                               'Exit'],
                       ),
     ]
     answers = inquirer.prompt(questions)
     return answers['option_choose']
+
+
+def firts_menu():
+    import inquirer
+    questions = [
+        inquirer.List('firts_choose',
+                      message="Choose your option",
+                      choices=['Login', 'Register User', 'Exit'],
+                      ),
+    ]
+    answers = inquirer.prompt(questions)
+    return answers['firts_choose']
 
 
 def select_plan():
@@ -24,7 +37,7 @@ def select_plan():
     questions = [
         inquirer.List('plan',
                       message="Choose your plan",
-                      choices=['Basic','Medium', 'Premium'],
+                      choices=['Basic', 'Medium', 'Premium'],
                       ),
     ]
     answers = inquirer.prompt(questions)
@@ -43,9 +56,26 @@ def select_usertype():
     return answers['user_type']
 
 
+def select_class():
+    import inquirer
+    questions = [
+        inquirer.List('movie_class',
+                      message="Select the classification",
+                      choices=[0, 10, 12, 14, 16, 18],
+                      ),
+    ]
+    answers = inquirer.prompt(questions)
+    return answers['movie_class']
+
+
 def menu_repeat():
     option_choose = selection_menu()
     action(option_choose)
+
+
+def menu_repeat2():
+    first_choose = firts_menu()
+    action(first_choose)
 
 
 def id_user():
@@ -59,9 +89,9 @@ def id_user():
 
 
 
-def action(option_choose):
-    match option_choose:
-        case 'Logout':
+def action(choose):
+    match choose:
+        case 'Exit':
             print("SEE YOU NEXT TIME!")
 
         case 'Login':
@@ -74,9 +104,11 @@ def action(option_choose):
                 except (ValueError):
                     print('Invalid input! Just numbers.')
 
-            if user_ID == user['id']:
+            id_valid, id_name = user_id_check(user_ID)
+
+            if id_valid:
                 print()
-                print(f"WELCOME TO SEA-FLIX, {user_name}!")
+                print(f"WELCOME TO SEA-FLIX, {id_name}!")
                 menu_repeat()
             else:
                 print('You need to resgister yourself!')
@@ -140,12 +172,29 @@ def action(option_choose):
                 print(f'{k} = {v}\n')
             menu_repeat()
 
+        case 'Register Movie':
+            movie_title = input('Input the movie title>> ').strip().title()
+            movie_desc = input('Input a short description>> ').strip()
+            movie_plan = select_plan()
+            movie_class = select_class()
+
+            try:
+                creat_filmes(movie_title, movie_desc, movie_plan, movie_class)
+                print('Successfully registered')
+                menu_repeat()
+            except:
+                print('ERROR WHILE REGISTERING! Try again')
+                menu_repeat()
+
+        case 'List Movies':
+            show_movies()
+
 
 user = {}
 users = ['2323']
 adm_pass = 696969
 
 print("WELCOME TO SEA-FLIX")
-menu_repeat()
+menu_repeat2()
 
 x = input()
