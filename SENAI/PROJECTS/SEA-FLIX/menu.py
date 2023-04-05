@@ -120,42 +120,7 @@ def menu_repeat2():
 
 def menu_repeat_adm():
     adm_option_choose = adm_menu()
-    adm_action(adm_option_choose)
-
-
-def adm_action(choose):
-    match choose:
-        case 'Edit User':
-            show_users()
-            print()
-            while True:
-                try:
-                    column = update_user_section()
-                    new_value = input('Input the new value>> ')
-                    row = int(input('Input the row number>> '))
-
-                    modify_user(column, new_value, row)
-                    break
-                except:
-                    print('Invalid update! Try again!')
-            print()
-            menu_repeat_adm()
-
-        case 'Edit Movie':
-            show_movies()
-            print()
-            while True:
-                try:
-                    column = update_movie_section()
-                    new_value = input('Input the new value>> ')
-                    row = int(input('Input the row number>> '))
-
-                    modify_movie(column, new_value, row)
-                    break
-                except:
-                    print('Invalid update! Try again!')
-            print()
-            menu_repeat_adm()
+    action(adm_option_choose)
 
 
 def id_user():
@@ -273,6 +238,38 @@ def action(choose):
             show_movies()
             print()
             menu_repeat()
+
+        case 'Edit User':
+            show_users()
+            print()
+            while True:
+                try:
+                    column = update_user_section()
+                    new_value = input('Input the new value>> ')
+                    row = int(input('Input the row number>> '))
+
+                    modify_user(column, new_value, row)
+                    break
+                except:
+                    print('Invalid update! Try again!')
+            print()
+            menu_repeat_adm()
+
+        case 'Edit Movie':
+            show_movies()
+            print()
+            while True:
+                try:
+                    column = update_movie_section()
+                    new_value = input('Input the new value>> ')
+                    row = int(input('Input the row number>> '))
+
+                    modify_movie(column, new_value, row)
+                    break
+                except:
+                    print('Invalid update! Try again!')
+            print()
+            menu_repeat_adm()
 
 
 user = {}
