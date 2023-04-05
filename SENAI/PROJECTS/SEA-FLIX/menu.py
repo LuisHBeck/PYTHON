@@ -1,6 +1,7 @@
 from random import randint
 from create import *
 from read import *
+from update import *
 
 def selection_menu():
     '''
@@ -31,6 +32,45 @@ def firts_menu():
     answers = inquirer.prompt(questions)
     return answers['firts_choose']
 
+
+def adm_menu():
+    import inquirer
+    questions = [
+        inquirer.List('option_choose_adm',
+                      message="Choose your option",
+                      choices=['Register User', 'Edit User',
+                               'List Movies', 'Register Movie',
+                               'Edit Movie', 'Exit'],
+                      ),
+    ]
+    answers = inquirer.prompt(questions)
+    return answers['option_choose_adm']
+
+
+def update_user_section():
+    import inquirer
+    questions = [
+        inquirer.List('user_modify',
+                      message="What do you want to modify",
+                      choices=['user_name', 'user_age',
+                      'user_email', 'user_plan', 'user_type'],
+                      ),
+    ]
+    answers = inquirer.prompt(questions)
+    return answers['user_modify']
+
+
+def update_movie_section():
+    import inquirer
+    questions = [
+        inquirer.List('movie_modify',
+                      message="What do you want to modify",
+                      choices=['movie_name', 'movie_desc',
+                      'movie_plan', 'movie_class'],
+                      ),
+    ]
+    answers = inquirer.prompt(questions)
+    return answers['movie_modify']
 
 def select_plan():
     import inquirer
@@ -78,6 +118,46 @@ def menu_repeat2():
     action(first_choose)
 
 
+def menu_repeat_adm():
+    adm_option_choose = adm_menu()
+    adm_action(adm_option_choose)
+
+
+def adm_action(choose):
+    match choose:
+        case 'Edit User':
+            show_users()
+            print()
+            while True:
+                try:
+                    column = update_user_section()
+                    new_value = input('Input the new value>> ')
+                    row = int(input('Input the row number>> '))
+
+                    modify_user(column, new_value, row)
+                    break
+                except:
+                    print('Invalid update! Try again!')
+            print()
+            menu_repeat_adm()
+
+        case 'Edit Movie':
+            show_movies()
+            print()
+            while True:
+                try:
+                    column = update_movie_section()
+                    new_value = input('Input the new value>> ')
+                    row = int(input('Input the row number>> '))
+
+                    modify_movie(column, new_value, row)
+                    break
+                except:
+                    print('Invalid update! Try again!')
+            print()
+            menu_repeat_adm()
+
+
 def id_user():
     y = ''
     z = 0
@@ -86,7 +166,6 @@ def id_user():
         y += str(x)
         z = int(y)
     return z
-
 
 
 def action(choose):
@@ -105,11 +184,15 @@ def action(choose):
                     print('Invalid input! Just numbers.')
 
             id_valid, id_name = user_id_check(user_ID)
+            is_adm = user_adm_check(user_ID)
 
             if id_valid:
                 print()
                 print(f"WELCOME TO SEA-FLIX, {id_name}!")
-                menu_repeat()
+                if is_adm:
+                    menu_repeat_adm()
+                else:
+                    menu_repeat()
             else:
                 print('You need to resgister yourself!')
                 menu_repeat()
@@ -188,6 +271,8 @@ def action(choose):
 
         case 'List Movies':
             show_movies()
+            print()
+            menu_repeat()
 
 
 user = {}
