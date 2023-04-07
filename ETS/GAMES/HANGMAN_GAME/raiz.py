@@ -95,6 +95,11 @@ personagem = [
 letras_erradas = []
 letras_certas = []
 
+PROXIES = {
+    'http': 'http://ct67ca:23%23INDUSTRIAdigital@proxy.br.bosch.com:8080',
+    'https': 'http://ct67ca:23%23INDUSTRIAdigital@proxy.br.bosch.com:8080'
+}
+
 while len(dicas) != 1:
     try:
         url1 = 'http://api.dicionario-aberto.net/random'
