@@ -1,14 +1,15 @@
-import inquirer
 from random import randint
 from create import *
 from read import *
 from update import *
+from delete import *
 
 def selection_menu():
     '''
     function using inquirer, for user choose the action
     :return:  select
     '''
+    import inquirer
     questions = [
         inquirer.List('option_choose',
                       message="Choose your option",
@@ -22,6 +23,7 @@ def selection_menu():
 
 
 def firts_menu():
+    import inquirer
     questions = [
         inquirer.List('firts_choose',
                       message="Choose your option",
@@ -33,12 +35,13 @@ def firts_menu():
 
 
 def adm_menu():
+    import inquirer
     questions = [
         inquirer.List('option_choose_adm',
                       message="Choose your option",
-                      choices=['Register User', 'Edit User',
+                      choices=['Register User', 'Edit User', 'Delete User',
                                'List Movies', 'Register Movie',
-                               'Edit Movie', 'Exit'],
+                               'Edit Movie', 'Delete Movie', 'Exit'],
                       ),
     ]
     answers = inquirer.prompt(questions)
@@ -46,6 +49,7 @@ def adm_menu():
 
 
 def update_user_section():
+    import inquirer
     questions = [
         inquirer.List('user_modify',
                       message="What do you want to modify",
@@ -58,6 +62,7 @@ def update_user_section():
 
 
 def update_movie_section():
+    import inquirer
     questions = [
         inquirer.List('movie_modify',
                       message="What do you want to modify",
@@ -69,6 +74,7 @@ def update_movie_section():
     return answers['movie_modify']
 
 def select_plan():
+    import inquirer
     questions = [
         inquirer.List('plan',
                       message="Choose your plan",
@@ -80,6 +86,7 @@ def select_plan():
 
 
 def select_usertype():
+    import inquirer
     questions = [
         inquirer.List('user_type',
                       message="Select your user type",
@@ -91,6 +98,7 @@ def select_usertype():
 
 
 def select_class():
+    import inquirer
     questions = [
         inquirer.List('movie_class',
                       message="Select the classification",
@@ -124,6 +132,13 @@ def id_user():
         y += str(x)
         z = int(y)
     return z
+
+def menu(user_ID):
+    is_adm = user_adm_check(user_ID)
+    if is_adm:
+        menu_repeat_adm()
+    else:
+        menu_repeat()
 
 
 def action(choose):
@@ -264,6 +279,31 @@ def action(choose):
             print()
             menu_repeat_adm()
 
+        case 'Delete Movie':
+            show_movies()
+            print()
+            while True:
+                try:
+                    row = int(input('Input the row number>> '))
+                    delet_movie(row)
+                    break
+                except:
+                    print('Invalid update! Try again!')
+            print()
+            menu_repeat_adm()
+
+        case 'Delete User':
+            show_users()
+            print()
+            while True:
+                try:
+                    row = int(input('Input the row number>> '))
+                    delet_user(row)
+                    break
+                except:
+                    print('Invalid update! Try again!')
+            print()
+            menu_repeat_adm()
 
 user = {}
 users = ['2323']
