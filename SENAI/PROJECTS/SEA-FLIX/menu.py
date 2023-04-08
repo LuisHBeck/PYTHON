@@ -133,13 +133,6 @@ def id_user():
         z = int(y)
     return z
 
-def menu(user_ID):
-    is_adm = user_adm_check(user_ID)
-    if is_adm:
-        menu_repeat_adm()
-    else:
-        menu_repeat()
-
 
 def action(choose):
     match choose:
@@ -309,7 +302,6 @@ user = {}
 users = ['2323']
 adm_pass = 696969
 
-print("WELCOME TO SEA-FLIX")
-menu_repeat2()
-
-x = input()
+def run():
+    menu_repeat2()
+    x = input()
