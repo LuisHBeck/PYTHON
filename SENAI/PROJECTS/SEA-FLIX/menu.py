@@ -1,8 +1,8 @@
 from random import randint
-from create import *
-from read import *
-from update import *
-from delete import *
+import create  
+import read 
+import update 
+import delete 
 
 def selection_menu():
     '''
