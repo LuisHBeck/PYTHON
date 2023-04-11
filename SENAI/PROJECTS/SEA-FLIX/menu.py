@@ -1,15 +1,15 @@
 from random import randint
-import create  
-import read 
-import update 
-import delete 
+from create import *
+from read import *
+from update import *
+from delete import *
+import inquirer
 
 def selection_menu():
     '''
     function using inquirer, for user choose the action
     :return:  select
     '''
-    import inquirer
     questions = [
         inquirer.List('option_choose',
                       message="Choose your option",
@@ -23,7 +23,6 @@ def selection_menu():
 
 
 def firts_menu():
-    import inquirer
     questions = [
         inquirer.List('firts_choose',
                       message="Choose your option",
@@ -35,7 +34,6 @@ def firts_menu():
 
 
 def adm_menu():
-    import inquirer
     questions = [
         inquirer.List('option_choose_adm',
                       message="Choose your option",
@@ -49,7 +47,6 @@ def adm_menu():
 
 
 def update_user_section():
-    import inquirer
     questions = [
         inquirer.List('user_modify',
                       message="What do you want to modify",
@@ -62,7 +59,6 @@ def update_user_section():
 
 
 def update_movie_section():
-    import inquirer
     questions = [
         inquirer.List('movie_modify',
                       message="What do you want to modify",
@@ -74,7 +70,6 @@ def update_movie_section():
     return answers['movie_modify']
 
 def select_plan():
-    import inquirer
     questions = [
         inquirer.List('plan',
                       message="Choose your plan",
@@ -86,7 +81,6 @@ def select_plan():
 
 
 def select_usertype():
-    import inquirer
     questions = [
         inquirer.List('user_type',
                       message="Select your user type",
@@ -98,7 +92,6 @@ def select_usertype():
 
 
 def select_class():
-    import inquirer
     questions = [
         inquirer.List('movie_class',
                       message="Select the classification",
