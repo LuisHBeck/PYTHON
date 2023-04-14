@@ -1,0 +1,96 @@
+class Conta:
+    def __init__(self, numero: int, titular: str, saldo: float, limite: float) -> None:
+        """
+        Função que constroi um objeto do tipo conta
+        :param numero: int
+        :param titular: str
+        :param saldo: float
+        :param limite: float
+        """
+        print(f'Building the object: {self}')
+        self.__numero = numero
+        self.__titular = titular
+        self.__saldo = saldo
+        self.__limite = limite
+
+    def extrair(self) -> None:
+        """
+        Função que retorna o etrato do titular
+        :return: None
+        """
+        print(f'Saldo {self.get_saldo()} do titular {self.tittular}')
+
+    def depositar(self, deposito: float) -> None:
+        """
+        Função que realiza um deposito na conta
+        :param deposito: valor depositado
+        :return: None
+        """
+        self.__saldo += deposito
+
+    def sacar(self, saque: float) -> None:
+        """
+        Função que realiza um saque na conta
+        :param saque: valor sacado
+        :return: None
+        """
+        if self.__verificar_saque(saque):
+            self.__saldo -= saque
+        else:
+            print('Valor acima do seu limite')
+
+    def tranferir(self, valor: float, destino) -> None:
+        """
+        Função que realiza tranferencia entre contas
+        :param valor: valor tranferido
+        :param destino: conta de destino
+        :return: None
+        """
+        self.sacar(valor)
+        destino.depositar(valor)
+
+    def get_saldo(self):
+        return self.__saldo
+
+    # def get_titular(self):
+    #     return self.__titular
+
+    @property
+    def tittular(self):
+        return self.__titular.upper()
+
+    def set_limite(self, limite: float):
+        self.__limite = limite
+
+    @property
+    def limite(self):
+        return self.__limite
+
+    @limite.setter
+    def limite(self, valor: float):
+        if valor <= 1.1*self.__limite:
+            self.__limite = valor
+        else:
+            print('Limite acima de 10%. Consulte um gerente.')
+
+    def __verificar_saque(self, valor: float) -> bool:
+        if valor <= self.limite + self.__saldo:
+            return True
+        else:
+            return False
+
+
+if __name__ == '__main__':
+    conta_beck = Conta(numero=123, titular="Beck", saldo=1525, limite=3000)
+    conta_beck.extrair()
+    # conta_beck.depositar(1500)
+    # conta_beck.extrair()
+    # conta_beck.sacar(1500)
+    # conta_beck.extrair()
+    # conta2 = Conta(numero=456, titular="Isaac", saldo=100, limite=1000)
+    # # conta2.tranferir(100, conta_beck)
+    # conta2.extrair()
+    # conta_beck.extrair()
+    conta_beck.limite = 3300
+    print(conta_beck.__dict__)
+    conta_beck.sacar(1000)
